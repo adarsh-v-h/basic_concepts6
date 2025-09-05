@@ -3,6 +3,16 @@ struct Rectangle{
     width: u32,
     height: u32,
 }
+// example for associated fucntion that dont use self as paramter but as return
+// this can be used to create an instance 
+impl Rectangle {
+    fn square(size: u32) -> Self{ // Self return value creates an instance of struct with associated fun square
+        Self {
+            width: size, 
+            height: size,
+        }
+    }
+}
 impl Rectangle{
     fn can_hold(&self, other: &Rectangle) -> bool{ // rect1 will be as self and rect2 will be as other, both will be of type Rectangle, but in method the fields of rect1 will be called type self,
 
@@ -54,6 +64,12 @@ This works because methods have clear receivers - type of self.*/
 // will return true if does or false, we will create the 2 instances of Rectangle and then pass them
     println!("Can rect1 hold rect2? {}", rect1.can_hold(&rect2));
     // both are being passed as reference, even tho rect1 doesnt have &, the Rust will complie as if it has, because its already defined in function "&self",
-
-
+    //-------------------------------------------
+    // All functions defined within an impl block are called associated functions because they’re associated with the type named after the impl.
+/*Associated functions that aren’t methods are often used for constructors that will return a new instance of the struct.
+These are often called new , but new isn’t a special name and isn’t built into the language. */
+    let sq1 = Rectangle::square(3);
+    // we created an instance of of Rectangle, with the assocaited function square,
+    println!("The new instance with assocaited fun square {:#?}", sq1);
+    // its similar to how we used "from" in with String, called namespaced
 }
